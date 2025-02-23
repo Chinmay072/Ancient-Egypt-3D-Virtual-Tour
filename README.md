@@ -37,8 +37,8 @@ An immersive 3D virtual experience of ancient Egypt built with A-Frame, featurin
 This project uses 3D models from various sources. All models are used under their respective licenses:
 
 - Pyramid Model: [Egyptian Pyramid by MarloesB](https://skfb.ly/6UKzH) (CC Attribution)
-- Sphinx Model: [Great Sphinx of Giza by Abrar Mollah](https://sketchfab.com/3d-models/great-sphinx-of-giza-d980a5905a1b4774a583d6db878d4157) (CC Attribution)
-- Temple Model: [Egyptian Temple by Brad](https://sketchfab.com/3d-models/egyptian-temple-08c1c82a98d24ba6b4747ac13f98dcc2) (CC Attribution)
+- Sphinx Model: [Great Sphinx by danderson4](https://skfb.ly/6DqNM) (CC Attribution-NonCommercial)
+- Temple Model: [Egyptian Temple by CHEI - UC San Diego](https://skfb.ly/6uO8q) (CC Attribution)
 - House Model: [Ancient Egyptian House by Paul Baillargeon](https://sketchfab.com/3d-models/ancient-egyptian-house-9a089a6c4c2f4c8c9f8f3f6a7e2b4d5e) (CC Attribution)
 - Obelisk Model: [Egyptian Obelisk by Mohamed Hassan](https://sketchfab.com/3d-models/egyptian-obelisk-1a2b3c4d5e6f7g8h9i0j) (CC Attribution)
 - Bridge Model: [Ancient Bridge by Sarah Anderson](https://sketchfab.com/3d-models/ancient-bridge-2b3c4d5e6f7g8h9i0j1k) (CC Attribution)
