@@ -49,10 +49,14 @@ This project uses 3D models from various sources. All models are used under thei
 ## 🚀 Getting Started
 
 1. Clone the repository:
-2. bash
-git clone https://github.com/yourusername/ancient-egypt-experience.git
-
-3. Open `index.html` in a modern web browser
+   ```bash
+   git clone https://github.com/Chinmay072/Ancient-Egypt-3D-Virtual-Tour.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Ancient-Egypt-3D-Virtual-Tour
+   ```
+3. Open `index-Egypt.html` in your web browser
 4. Start exploring ancient Egypt!
 ## 🙏 Acknowledgments
 
