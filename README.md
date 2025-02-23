@@ -34,7 +34,7 @@ An immersive 3D virtual experience of ancient Egypt built with A-Frame, featurin
 
 ## 🎨 3D Models Attribution
 
-This project uses 3D models from various sources. All models are used under their respective licenses:
+This project uses 3D models from Sketchfab. All models with their creators and link :
 
 - Pyramid Model: [Egyptian Pyramid by MarloesB](https://skfb.ly/6UKzH) (CC Attribution)
 - Sphinx Model: [Great Sphinx by danderson4](https://skfb.ly/6DqNM) (CC Attribution-NonCommercial)
@@ -42,9 +42,9 @@ This project uses 3D models from various sources. All models are used under thei
 - House Model: [Ancient Egyptian House by AnshiNoWara](https://skfb.ly/oOZUu) (CC Attribution)
 - Obelisk Model: [Egyptian Obelisk by Gunnar Correa](https://skfb.ly/6WO8T) (CC Attribution)
 - Bridge Model: [Ancient Bridge by Wnsz](https://skfb.ly/6XTAu) (CC Attribution)
-- Stone Bridge Model: [Stone Bridge by Michael Chen](https://sketchfab.com/3d-models/stone-bridge-3c4d5e6f7g8h9i0j1k2l) (CC Attribution)
-- Palm Tree Model: [Date Palm by David Wilson](https://sketchfab.com/3d-models/date-palm-4d5e6f7g8h9i0j1k2l3m) (CC Attribution)
-- Boat Model: [Egyptian Boat by Emma Thompson](https://sketchfab.com/3d-models/egyptian-boat-5e6f7g8h9i0j1k2l3m4n) (CC Attribution)
+- Stone Bridge Model: [Stone Bridge by Jawahar Yokesh](https://skfb.ly/oH8sR) (CC Attribution)
+- Palm Tree Model: [Date Palm by blend.file](https://skfb.ly/oIOS9) (CC Attribution)
+- Boat Model: [Egyptian Boat by Miguel Bandera](https://skfb.ly/ZxSB) (CC Attribution-NonCommercial)
 
 ## 🚀 Getting Started
 
