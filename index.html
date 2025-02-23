@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ancient Egypt Experience</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <style>
+        #info-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            display: none;
+            z-index: 1000;
+            text-align: center;
+        }
+        #info-display h2 {
+            color: #FDB813;
+            margin-top: 0;
+        }
+        #back-button {
+            background: #FDB813;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        #back-button:hover {
+            background: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        AFRAME.registerComponent('model-info', {
+            schema: {
+                title: {type: 'string'},
+                info: {type: 'string'}
+            },
+            
+            init: function() {
+                let el = this.el;
+                let data = this.data;
+                let infoDisplay = document.querySelector('#info-display');
+                
+                el.addEventListener('click', function() {
+                    infoDisplay.innerHTML = `
+                        <h2>${data.title}</h2>
+                        <p>${data.info}</p>
+                        <button id="back-button" onclick="document.querySelector('#info-display').style.display='none'">
+                            Back
+                        </button>
+                    `;
+                    infoDisplay.style.display = 'block';
+                });
+            }
+        });
+    </script>
+
+    <a-scene>
+        <!-- Asset Management System -->
+        <a-assets>
+            <!-- Skybox -->
+            <img id="egypt-sky" src="assets/images/skyboxes/egypt.jpeg">
+            
+            <!-- Texture -->
+            <img id="sand-texture" src="assets/images/textures/sand.jpeg">
+            
+            <!-- 3D Models -->
+            <a-asset-item id="pyramid-model" src="assets/models/pyramid.glb"></a-asset-item>
+            <a-asset-item id="sphinx-model" src="assets/models/sphinx.glb"></a-asset-item>
+            <a-asset-item id="temple-model" src="assets/models/temple.glb"></a-asset-item>
+            <a-asset-item id="obelisk-model" src="assets/models/obelisk.glb"></a-asset-item>
+            <a-asset-item id="house-model" src="assets/models/house.glb"></a-asset-item>
+            <a-asset-item id="bridge-model" src="assets/models/bridge.glb"></a-asset-item>
+            <a-asset-item id="stone-bridge-model" src="assets/models/stone-bridge.glb"></a-asset-item>
+            <a-asset-item id="palm-tree-model" src="assets/models/palm-tree.glb"></a-asset-item>
+            <a-asset-item id="boat-model" src="assets/models/boat.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- Environment -->
+        <a-sky src="#egypt-sky"></a-sky>
+        <a-entity environment="preset: egypt; 
+                              groundColor: #C2B280; 
+                              groundColor2: #8B7355;
+                              groundTexture: squares;
+                              dressing: none;
+                              ground: flat;
+                              dressingAmount: 0;
+                              fog: 0.6"></a-entity>
+
+        <!-- Desert Ground -->
+        <a-plane id="desert-ground"
+                 width="200" 
+                 height="200" 
+                 rotation="-90 0 0"
+                 position="0 0 0"
+                 material="src: #sand-texture;
+                          repeat: 20 20;
+                          roughness: 1;
+                          color: #d4b16a"></a-plane>
+
+        <!-- Nile River -->
+        <a-entity id="nile-river" position="0 0.1 0">
+            <!-- River Banks -->
+            <a-plane width="17" 
+                     height="200" 
+                     rotation="-90 0 0"
+                     position="0 -0.05 0"
+                     material="color: #C2B280;
+                              roughness: 1"></a-plane>
+            <!-- Main River Body -->
+            <a-plane width="15" 
+                     height="200" 
+                     rotation="-90 0 0"
+                     material="shader: standard;
+                              color: #3498db; 
+                              opacity: 0.9; 
+                              metalness: 0.6; 
+                              roughness: 0.2;
+                              transparent: true"
+                     animation="property: components.material.material.normalScale; 
+                              from: 1 1; 
+                              to: 2 2; 
+                              dir: alternate; 
+                              dur: 2000; 
+                              loop: true">
+            </a-plane>
+        </a-entity>
+
+        <!-- Bridge across Nile -->
+        <a-entity id="nile-bridge" position="0 1 0">
+            <a-entity gltf-model="#bridge-model"
+                      scale="0.5 0.5 0.5"
+                      position="0 -2 0"
+                      rotation="0 90 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: Ancient Egyptian Bridge;
+                                 info: While ancient Egyptians primarily relied on boats for crossing the Nile, they also developed innovative bridge-building techniques. Early bridges were often made from boats lashed together to form pontoon bridges. During the New Kingdom period, more permanent structures began to appear. These bridges were crucial for trade and transportation between the east and west banks of the Nile, connecting important religious and administrative centers."></a-entity>
+        </a-entity>
+
+        <!-- Stone Bridge -->
+        <a-entity gltf-model="#stone-bridge-model"
+                  scale="1 0.7 0.5"
+                  position="0 -0.2 -26"
+                  rotation="0 0 0"
+                  shadow="cast: true"
+                  class="clickable"
+                  model-info="title: Ancient Egyptian Stone Bridge;
+                             info: Stone bridges in ancient Egypt represented advanced engineering capabilities. These structures were crucial for connecting temples and administrative centers, especially during the annual Nile flood. Built with massive limestone blocks and often decorated with hieroglyphs, these bridges demonstrated the Egyptians' masterful understanding of architecture and weight distribution."></a-entity>
+
+        <!-- Boat on the Nile -->
+        <a-entity gltf-model="#boat-model"
+                  scale="0.5 0.5 0.5"
+                  position="0 1 17"
+                  rotation="0 45 0"
+                  shadow="cast: true"
+                  class="clickable"
+                  model-info="title: Ancient Egyptian Boat;
+                             info: Boats were essential to Egyptian civilization, used for transportation, trade, and religious ceremonies. The most famous are the solar boats, believed to carry the sun god Ra across the sky. Egyptians built their boats from local acacia or cedar wood imported from Lebanon. These vessels ranged from small fishing boats to large cargo ships and elaborate royal barges."></a-entity>
+
+        <!-- Roads System -->
+        <a-entity id="roads">
+            <!-- West Bank Road (Horizontal) -->
+            <a-plane width="30" 
+                     height="3" 
+                     rotation="-90 0 0"
+                     position="-25 0.05 0"
+                     material="color: #2f271d; 
+                              roughness: 0.8;
+                              src: #sand-texture;
+                              repeat: 6 1"></a-plane>
+
+            <!-- East Bank Road (Horizontal) -->
+            <a-plane width="30" 
+                     height="3" 
+                     rotation="-90 0 0"
+                     position="25 0.05 0"
+                     material="color: #2f271d; 
+                              roughness: 0.8;
+                              src: #sand-texture;
+                              repeat: 6 1"></a-plane>
+
+            <!-- West Vertical Road -->
+            <a-plane width="3" 
+                     height="130" 
+                     rotation="-90 0 0"
+                     position="-15 0.05 -15"
+                     material="color: #8B7355; 
+                              roughness: 0.8;
+                              src: #sand-texture;
+                              repeat: 1 6"></a-plane>
+
+            <!-- East Vertical Road -->
+            <a-plane width="3" 
+                     height="130" 
+                     rotation="-90 0 0"
+                     position="15 0.05 15"
+                     material="color: #8B7355; 
+                              roughness: 0.8;
+                              src: #sand-texture;
+                              repeat: 1 6"></a-plane>
+        </a-entity>
+
+        <!-- West Bank (Left Side) -->
+        <a-entity id="west-bank" position="-25 0 0">
+            <!-- Sphinx -->
+            <a-entity gltf-model="#sphinx-model"
+                      scale="1 1 1"
+                      position="-5 5 -20"
+                      rotation="0 90 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: The Great Sphinx of Giza;
+                                 info: The Great Sphinx is one of the most iconic monuments of ancient Egypt. Built around 2500 BCE during the Old Kingdom, this limestone statue combines a human head with a lion's body, measuring 240 feet long and 66 feet high. The Sphinx was believed to be a guardian figure and possibly represented Pharaoh Khafre. Its nose was damaged centuries ago, but it remains one of the most mysterious and impressive structures from ancient Egypt."></a-entity>
+
+            <!-- Houses West -->
+            <a-entity id="west-houses" position="0 0 20">
+                <a-entity gltf-model="#house-model"
+                          scale="1 1 1"
+                          position="0 0 -7"
+                          rotation="0 90 0"
+                          repeat="4"
+                          shadow="cast: true"
+                          class="clickable"
+                          model-info="title: Ancient Egyptian House;
+                                     info: Ancient Egyptian homes varied greatly based on social status. Common people lived in simple mud-brick houses with few rooms, while wealthy citizens enjoyed larger homes with gardens and multiple stories. Houses typically had flat roofs used as living spaces and for sleeping during hot nights. Windows were placed high on walls for privacy and to help with cooling. Many homes had storage areas for grain and other necessities, and some wealthy homes even included private shrines."></a-entity>
+            </a-entity>
+
+            <!-- Obelisk -->
+            <a-entity gltf-model="#obelisk-model"
+                      scale="0.01 0.03 0.01"
+                      position="7 2 -3"
+                      rotation="0 0 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: Egyptian Obelisk;
+                                 info: Obelisks were tall, four-sided monuments carved from single pieces of stone. These monolithic structures symbolized the sun god Ra and marked temple entrances. Their pyramidal tops were often covered in gold or electrum to catch the sun's rays. Obelisks also served as solar calendars and symbols of pharaonic power. Many were later taken to Rome, Paris, London, and New York as symbols of empire."></a-entity>
+            <a-entity gltf-model="#obelisk-model"
+                      scale="0.01 0.03 0.01"
+                      position="7 2 3"
+                      rotation="0 0 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: Egyptian Obelisk;
+                                 info: Obelisks were tall, four-sided monuments carved from single pieces of stone. These monolithic structures symbolized the sun god Ra and marked temple entrances. Their pyramidal tops were often covered in gold or electrum to catch the sun's rays. Obelisks also served as solar calendars and symbols of pharaonic power. Many were later taken to Rome, Paris, London, and New York as symbols of empire.">
+                    </a-entity>
+        </a-entity>
+
+        <!-- East Bank (Right Side) -->
+        <a-entity id="east-bank" position="25 0 0">
+            <!-- Pyramid -->
+            <a-entity gltf-model="#pyramid-model"
+                      scale="3 3 3"
+                      position="15 0 -27"
+                      rotation="0 -90 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: The Great Pyramid of Giza;
+                                 info: The Great Pyramid was built around 2560 BCE as a tomb for Pharaoh Khufu. It's the largest of the three pyramids at Giza and the only one of the Seven Wonders of the Ancient World that remains largely intact. Originally standing 481 feet tall, it was the world's tallest structure for over 3,800 years. Built with approximately 2.3 million stone blocks, its construction remains a testament to ancient Egyptian engineering and architectural expertise."></a-entity>
+
+            <!-- Houses East -->
+            <a-entity id="east-houses" position="0 0 0">
+                <a-entity gltf-model="#house-model"
+                          scale="1 1 1"
+                          position="0 0 10"
+                          rotation="0 -90 0"
+                          repeat="3"
+                          shadow="cast: true"
+                          class="clickable"
+                          model-info="title: Ancient Egyptian House;
+                                     info: Ancient Egyptian homes varied greatly based on social status. Common people lived in simple mud-brick houses with few rooms, while wealthy citizens enjoyed larger homes with gardens and multiple stories. Houses typically had flat roofs used as living spaces and for sleeping during hot nights. Windows were placed high on walls for privacy and to help with cooling. Many homes had storage areas for grain and other necessities, and some wealthy homes even included private shrines."></a-entity>
+            </a-entity>
+
+            <!-- Temple -->
+            <a-entity gltf-model="#temple-model"
+                      scale="2.5 2.5 2.5"
+                      position="6 0 25"
+                      rotation="0 -90 0"
+                      shadow="cast: true"
+                      class="clickable"
+                      model-info="title: Ancient Egyptian Temple;
+                                 info: Egyptian temples were considered the homes of the gods and were central to religious life. These massive structures featured detailed hieroglyphic carvings, colorful reliefs, and grand columns. The temple complex typically included an outer courtyard, hypostyle halls, and the most sacred inner sanctuary. Famous examples include the Temples of Karnak and Luxor. Priests performed daily rituals, and temples played crucial roles in festivals and ceremonies throughout the Egyptian calendar."></a-entity>
+        </a-entity>
+
+        <!-- Palm Trees Groups -->
+        <a-entity id="palm-trees">
+            <!-- West Bank Palm Trees -->
+            <a-entity id="west-palm-trees">
+                <!-- Along West Road -->
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-20 0 -15"
+                          rotation="0 0 0"
+                          shadow="cast: true"
+                          class="clickable"
+                          model-info="title: Egyptian Palm Trees;
+                                     info: Palm trees, particularly date palms, were vital to ancient Egyptian life. They provided food, building materials, and shade. Date palms were considered sacred and often appeared in artwork and hieroglyphs. Their presence along roads and near temples created natural oases and marked important pathways."></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-20 0 -10"
+                          rotation="0 30 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-20 0 -5"
+                          rotation="0 60 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-19 0 10"
+                          rotation="0 15 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-19 0 13"
+                          rotation="0 45 0"></a-entity>
+            </a-entity>
+
+            <!-- East Bank Palm Trees -->
+            <a-entity id="east-palm-trees">
+                <!-- Along East Road -->
+                <!-- <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="20 0 -15"
+                          rotation="0 180 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="20 0 -10"
+                          rotation="0 210 0"></a-entity> -->
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="20 0 -5"
+                          rotation="0 240 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="19 0 10"
+                          rotation="0 195 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="19 0 13"
+                          rotation="0 225 0"></a-entity>
+            </a-entity>
+
+            <!-- Near Temple Palm Trees -->
+            <a-entity id="temple-palm-trees">
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="20 0 26"
+                          rotation="0 90 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="20 0 34"
+                          rotation="0 120 0"></a-entity>
+            </a-entity>
+
+            <!-- Near Sphinx Palm Trees -->
+            <a-entity id="sphinx-palm-trees">
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-20 0 -22"
+                          rotation="0 270 0"></a-entity>
+                <a-entity gltf-model="#palm-tree-model"
+                          scale="0.5 0.5 0.5"
+                          position="-20 0 -28"
+                          rotation="0 300 0"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <!-- Lighting -->
+        <a-entity id="egypt-lighting">
+            <a-light type="directional"
+                     position="-1 1 -0.5"
+                     intensity="0.8"
+                     color="#FDB813"
+                     castShadow="true"></a-light>
+            <a-light type="ambient"
+                     color="#FFF5B6"
+                     intensity="0.5"></a-light>
+        </a-entity>
+
+        <!-- Camera -->
+        <a-entity position="0 2 30">
+            <a-camera look-controls wasd-controls>
+                <a-cursor raycaster="objects: .clickable"></a-cursor>
+            </a-camera>
+        </a-entity>
+
+    </a-scene>
+
+    <!-- Add this info display div -->
+    <div id="info-display"></div>
+
+    <div id="controls-help" style="position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); color: white; padding: 15px; border-radius: 5px;">
+        <h3>Controls</h3>
+        <p>WASD - Move</p>
+        <p>Mouse - Look</p>
+        <p>Click - Interact</p>
+    </div>
+</body>
+</html>
